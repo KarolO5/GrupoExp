@@ -36,6 +36,17 @@ except ImportError:
         "  (sin internet: instala desde wheel descargado previamente)"
     )
 
+#Logging
+Path("logs").mkdir(exist_ok=True)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.StreamHandler(),
+logging.FileHandler("logs/detector.log"),
+    ],
+)
+log = logging.getLogger(__name__)
 # ─── OLED SSD1306 (128×64, I2C) ──────────────────────────────────────────────
 try:
     from PIL import Image as PILImage, ImageDraw, ImageFont
@@ -47,18 +58,6 @@ except Exception as e:
     OLED_AVAILABLE = False
     log.warning(f"OLED desactivada: {e}")
 
-# ─── Logging ──────────────────────────────────────────────────────────────────
-Path("logs").mkdir(exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler("logs/detector.log"),
-    ],
-)
-log = logging.getLogger(__name__)
-
 
 # ══════════════════════════════════════════════════════════════════════════════
 # CONFIG
@@ -67,20 +66,20 @@ log = logging.getLogger(__name__)
 class Config:
     # Modelo
     model_path: str            = "models/nuevo_modelo.eim"
-    confidence_threshold: float = 0.55
+    confidence_threshold: float = 0.6
 
     # Cámara
     camera_index: int          = 0
-    camera_width: int          = 1920
-    camera_height: int         = 1080
+    camera_width: int          = 640
+    camera_height: int         = 480
     camera_fps: int            = 30
 
     # ROI — fracción del lado corto de la imagen
-    roi_fraction: float        = 0.55
+    roi_fraction: float        = 0.6
 
     # Tracking
-    max_disappeared: int       = 30    # frames sin detectarse antes de eliminar ID
-    max_distance: float        = 80.0  # px máx para seguir siendo el mismo ID
+    max_disappeared: int       = 40    # frames sin detectarse antes de eliminar ID
+    max_distance: float        = 15  # px máx para seguir siendo el mismo ID
 
     # Snapshots
     snapshot_interval: int     = 10    # nuevas detecciones entre cada snapshot
@@ -418,6 +417,16 @@ def run(cfg: Config = CFG):
     # ══════════════════════════════════════════════════════════════════════════
     while True:
         ret, frame = cap.read()
+#        if frame_count % 60 == 0: #cada 2 sec si 30fps
+ #           test_path = session.register_snapshot()
+  #          cv2.imwrite(str(test_path), frame)
+   #         print(f"Snapshot test -> {test_path}")
+        if frame_count %30 == 0: #cada 1 sec
+            print(
+                f"Personas: {counters.persons} |"
+                f"Bicis: {counters.bicycles}|"
+                f"EcoBici:{counters.ecobicis}"
+            )
         if not ret:
             log.warning("Frame fallido, reintentando...")
             time.sleep(0.04)
@@ -532,8 +541,8 @@ def run(cfg: Config = CFG):
                 daemon=True,
             ).start()
 
-        cv2.imshow(cfg.window_name, frame)
-        key = cv2.waitKey(1) & 0xFF
+#        cv2.imshow(cfg.window_name, frame)
+        key = -1
         if key == ord("q"):
             log.info("Saliendo...")
             break
@@ -555,7 +564,6 @@ def run(cfg: Config = CFG):
     history.save_session(session)
 
     cap.release()
-    cv2.destroyAllWindows()
     runner.stop()
 
     log.info("Sesión #%03d cerrada y guardada. Contadores: %s",
@@ -563,5 +571,13 @@ def run(cfg: Config = CFG):
 
 
 if __name__ == "__main__":
-    run()
+    try:
+        run()
+    except KeyboardInterrupt:
+        print("\n Interrupcion detectada..guardando sesion")
+        try:
+            session.end_session()
+            print("sesion guardada")
+        except Exception as e:
+                print("error al guardar:{e}")
 
