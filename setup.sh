@@ -11,7 +11,6 @@
 # ══════════════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
-VENV_DIR="venv"
 PYTHON="python3"
 PID_FILE=".detector.pid"
 LOG_FILE="logs/detector.log"
@@ -39,16 +38,12 @@ cmd_setup() {
         fi
     done
 
-    banner "Creando virtualenv con acceso a paquetes del sistema"
-    $PYTHON -m venv "$VENV_DIR" --system-site-packages
-    # system-site-packages permite usar OpenCV instalado con apt (compilado para aarch64)
-
-    banner "Instalando dependencias Python"
-    "$VENV_DIR/bin/pip" install --upgrade pip
-    "$VENV_DIR/bin/pip" install -r requirements.txt
+    banner "Verificando dependencias Python"
+    python3 -c "from edge_impulse_linux.image import ImageImpulseRunner; print('EI SDK OK')" \
+        || echo "SDK no encontrado. Corre: pip install -break-system-packages edge_impulse_linux"
 
     banner "Verificando Edge Impulse Linux SDK"
-    "$VENV_DIR/bin/python" -c "from edge_impulse_linux.image import ImageImpulseRunner; print('EI SDK OK')" \
+    "$VENV_DIR/bin/python" -c "from edge_impulse_linux.image import ImageImpulseRunner; print ('EI SDK OK')"\
         || err "SDK no encontrado. Revisa requirements.txt"
 
     banner "Verificando modelo .eim"
@@ -79,17 +74,11 @@ cmd_setup() {
 
 # ─── run ──────────────────────────────────────────────────────────────────────
 cmd_run() {
-    [[ -d "$VENV_DIR" ]] || err "Virtualenv no encontrado. Corre './setup.sh setup' primero."
-    mkdir -p logs
-    banner "Iniciando detector..."
-    "$VENV_DIR/bin/python" detector.py
+    python3 detector.py
 }
 
 cmd_run_bg() {
-    [[ -d "$VENV_DIR" ]] || err "Virtualenv no encontrado. Corre './setup.sh setup' primero."
-    mkdir -p logs
-    banner "Iniciando en background..."
-    nohup "$VENV_DIR/bin/python" detector.py >> "$LOG_FILE" 2>&1 &
+    nohub python3 detector.py
     echo $! > "$PID_FILE"
     ok "PID: $(cat $PID_FILE). Logs: $LOG_FILE"
 }
