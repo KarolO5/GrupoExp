@@ -43,8 +43,9 @@ try:
     import busio
     import adafruit_ssd1306
     OLED_AVAILABLE = True
-except ImportError:
+except Exception as e:
     OLED_AVAILABLE = False
+    log.warning(f"OLED desactivada: {e}")
 
 # ─── Logging ──────────────────────────────────────────────────────────────────
 Path("logs").mkdir(exist_ok=True)
