@@ -1,0 +1,18 @@
+# ── Core ──────────────────────────────────────────────────────────────────────
+opencv-python-headless>=4.8.0     # usa headless en la Rubik Pi (no GUI deps)
+numpy>=1.24.0
+
+# ── Edge Impulse Linux SDK ────────────────────────────────────────────────────
+edge_impulse_linux>=1.0.9          # incluye soporte .eim QNN
+
+# ── OLED SSD1306 (I2C) ───────────────────────────────────────────────────────
+# Comenta estas 3 líneas si no tienes la pantalla todavía
+adafruit-circuitpython-ssd1306>=2.12.0
+adafruit-blinka>=8.28.0
+pillow>=10.0.0
+
+# ── Utilidades ────────────────────────────────────────────────────────────────
+# (opcionales, para scripts de análisis posterior)
+# pandas>=2.0
+# matplotlib>=3.7
+
