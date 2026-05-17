@@ -562,4 +562,8 @@ def run(cfg: Config = CFG):
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     run()
+=======
+    run()
+>>>>>>> d8ff6ccc106496d047a822349b99b688d579387f
