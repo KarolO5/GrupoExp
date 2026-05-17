@@ -1,0 +1,10 @@
+{
+  "sesion": 3,
+  "timestamp": "2026-05-17 10:00:49",
+  "contadores": {
+    "personas": 1622,
+    "bicicletas": 960,
+    "ecobicis": 213
+  },
+  "detecciones": 6
+}

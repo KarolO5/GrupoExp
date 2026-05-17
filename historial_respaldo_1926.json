@@ -1,0 +1,104 @@
+[
+  {
+    "sesion": 1,
+    "modelo": "nuevo_modelo.eim",
+    "inicio": "2026-05-17 09:18:27",
+    "fin": "en curso",
+    "duracion": "00:00:00",
+    "duracion_seg": 0.0,
+    "conteo": {
+      "personas": 0,
+      "bicicletas": 0,
+      "ecobicis": 0
+    },
+    "frames_totales": 0,
+    "fps_promedio": 0.0,
+    "snapshots": 0,
+    "carpeta_snaps": "snapshots/sesion_001"
+  },
+  {
+    "sesion": 2,
+    "modelo": "nuevo_modelo.eim",
+    "inicio": "2026-05-17 09:29:00",
+    "fin": "en curso",
+    "duracion": "00:00:00",
+    "duracion_seg": 0.0,
+    "conteo": {
+      "personas": 0,
+      "bicicletas": 0,
+      "ecobicis": 0
+    },
+    "frames_totales": 0,
+    "fps_promedio": 0.0,
+    "snapshots": 0,
+    "carpeta_snaps": "snapshots/sesion_002"
+  },
+  {
+    "sesion": 3,
+    "modelo": "nuevo_modelo.eim",
+    "inicio": "2026-05-17 09:32:24",
+    "fin": "en curso",
+    "duracion": "00:00:00",
+    "duracion_seg": 0.0,
+    "conteo": {
+      "personas": 0,
+      "bicicletas": 0,
+      "ecobicis": 0
+    },
+    "frames_totales": 0,
+    "fps_promedio": 0.0,
+    "snapshots": 0,
+    "carpeta_snaps": "snapshots/sesion_003"
+  },
+  {
+    "sesion": 4,
+    "modelo": "nuevo_modelo.eim",
+    "inicio": "2026-05-17 10:20:19",
+    "fin": "en curso",
+    "duracion": "00:00:00",
+    "duracion_seg": 0.0,
+    "conteo": {
+      "personas": 0,
+      "bicicletas": 0,
+      "ecobicis": 0
+    },
+    "frames_totales": 0,
+    "fps_promedio": 0.0,
+    "snapshots": 0,
+    "carpeta_snaps": "snapshots/sesion_004"
+  },
+  {
+    "sesion": 5,
+    "modelo": "nuevo_modelo.eim",
+    "inicio": "2026-05-17 10:38:41",
+    "fin": "en curso",
+    "duracion": "00:00:00",
+    "duracion_seg": 0.0,
+    "conteo": {
+      "personas": 0,
+      "bicicletas": 0,
+      "ecobicis": 0
+    },
+    "frames_totales": 0,
+    "fps_promedio": 0.0,
+    "snapshots": 0,
+    "carpeta_snaps": "snapshots/sesion_005"
+  },
+  {
+    "sesion": 6,
+    "modelo": "nuevo_modelo.eim",
+    "inicio": "2026-05-17 10:42:51",
+    "fin": "en curso",
+    "duracion": "00:00:00",
+    "duracion_seg": 0.0,
+    "conteo": {
+      "personas": 0,
+      "bicicletas": 0,
+      "ecobicis": 0
+    },
+    "frames_totales": 0,
+    "fps_promedio": 0.0,
+    "snapshots": 0,
+    "carpeta_snaps": "snapshots/sesion_006"
+  }
+]
