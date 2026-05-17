@@ -66,7 +66,7 @@ log = logging.getLogger(__name__)
 @dataclass
 class Config:
     # Modelo
-    model_path: str            = "models/ecobicift_qnn_v2.eim"
+    model_path: str            = "models/nuevo_modelo.eim"
     confidence_threshold: float = 0.55
 
     # Cámara
