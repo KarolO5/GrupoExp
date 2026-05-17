@@ -173,9 +173,9 @@ class HistoryManager:
         """Suma acumulada de todas las sesiones."""
         return {
             "sesiones":   len(self.records),
-            "personas":   sum(r["conteo"]["personas"]   for r in self.records),
-            "bicicletas": sum(r["conteo"]["bicicletas"] for r in self.records),
-            "ecobicis":   sum(r["conteo"]["ecobicis"]   for r in self.records),
+            "personas":   sum(r.get("conteo", {}).get("personas", 0) for r in self.records),
+            "bicicletas": sum(r.get("conteo", {}).get("bicicletas", 0) for r in self.records),
+            "ecobicis":   sum(r.get("conteo", {}).get("ecobicis", 0) for r in self.records),
         }
 
 
